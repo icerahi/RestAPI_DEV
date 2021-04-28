@@ -16,9 +16,16 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from updates import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    path('api/auth/', include('accounts.api.urls')),
+    path('api/user/', include('accounts.api.user.urls')),
+    path('api/status/',include('status.api.urls')),
+
     path('api/updates/',include('updates.api.urls')),
     path('json/cbv1/',views.JsonCBV.as_view()),
     path('json/cbv2/',views.JsonCBV2.as_view()),
@@ -26,3 +33,7 @@ urlpatterns = [
     path('json/serialize/list/',views.SerializeListView.as_view()),
     path('json/serialize/detail/',views.SerializeDetailView.as_view())
 ]
+ 
+
+urlpatterns+=static(settings.MEDIA_URL,document_root=settings.MEDIA_ROOT)
+
