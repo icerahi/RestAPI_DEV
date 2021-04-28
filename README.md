@@ -1,1 +1,1 @@
-# pure_django_restapi
+# Rest API Developing in Django & DRF
